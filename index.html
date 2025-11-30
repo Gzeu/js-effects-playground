@@ -1,96 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS Effects Playground - Interactive JavaScript Animations</title>
-  <link rel="stylesheet" href="assets/css/main.css">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 JS Effects Playground - Interactive Visual Effects Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Header & Nav */
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 2px solid #6366f1;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: #00ff88;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            color: #0088ff;
+            border-bottom-color: #0088ff;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.1));
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #aaa;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            border: 2px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .btn-secondary:hover {
+            background: #00ff88;
+            color: #000;
+        }
+
+        /* Categories */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .category {
+            margin-bottom: 80px;
+        }
+
+        .category h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #00ff88;
+            border-left: 4px solid #0088ff;
+            padding-left: 15px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .demo-card {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .demo-card:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(0, 255, 136, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .demo-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .demo-card p {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .demo-card a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .demo-card a:hover {
+            background: #00ff88;
+            color: #000;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 136, 255, 0.2);
+            border: 1px solid #0088ff;
+            color: #0088ff;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  
-  <nav class="navbar">
+    <header>
+        <div class="navbar">
+            <h1 class="logo">🚀 JS Effects Playground</h1>
+            <nav>
+                <a href="#particles">Particles</a>
+                <a href="#canvas">Canvas</a>
+                <a href="#webgl">WebGL</a>
+                <a href="#scroll">Scroll</a>
+                <a href="https://github.com/Gzeu/js-effects-playground" target="_blank">👤 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>✨ Interactive Visual Effects</h1>
+        <p>A comprehensive collection of JavaScript animations and visual effects using Canvas, WebGL, and modern libraries</p>
+        <a href="#particles" class="btn btn-primary">🌟 Explore Demos</a>
+        <a href="https://github.com/Gzeu/js-effects-playground" target="_blank" class="btn btn-secondary">👤 View Source</a>
+    </div>
+
     <div class="container">
-      <h1 class="logo">🎨 JS Effects Playground</h1>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="demos/particles-gallery.html">Particles</a></li>
-        <li><a href="demos/scroll-effects.html">Scroll Effects</a></li>
-        <li><a href="demos/canvas-art.html">Canvas Art</a></li>
+        <!-- PARTICLES CATEGORY -->
+        <div class="category" id="particles">
+            <h2>🌊 Particle Systems</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>✨ Particles Gallery</h3>
+                    <p>Interactive particle animations with multiple effects and color schemes</p>
+                    <span class="badge">particles.js</span>
+                    <span class="badge">Interactive</span>
+                    <br>
+                    <a href="demos/particles-gallery.html">🌗 Open Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <h3>🐋 Metaballs</h3>
+                    <p>Blob-like shapes that fuse and interact with mouse movement</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">60 FPS</span>
+                    <br>
+                    <a href="demos/metaballs.html">🌗 Open Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <h3>퉰b Mouse Trails</h3>
+                    <p>Create beautiful particle trails that follow your mouse cursor</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">Smooth</span>
+                    <br>
+                    <a href="demos/mouse-trails.html">🌗 Open Demo →</a>
+                </div>
+            </div>
+        </div>
 
-              <li><a href="demos/matrix-rain.html">Matrix Rain</a></li>
-      <li><a href="demos/mouse-trails.html">Mouse Trails</a></li>
-      <li><a href="demos/canvas-art-extended.html">Canvas Art</a></li>
-                          <li><a href="demos/metaballs.html">Metaballs</a></li>
-                          <li><a href="demos/fractal-tree.html">Fractal Tree</a></li>
-                          <li><a href="demos/wave-shader.html">Wave Shader</a></li>
-        <li><a href="https://github.com/Gzeu/js-effects-playground" target="_blank">GitHub</a></li>
-      </ul>
+        <!-- CANVAS CATEGORY -->
+        <div class="category" id="canvas">
+            <h2>🌿 Canvas Art</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🎆 Canvas Art</h3>
+                    <p>Generative art and drawing effects created with HTML5 Canvas</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">Procedural</span>
+                    <br>
+                    <a href="demos/canvas-art.html">🌗 Open Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <h3>🕬 Canvas Extended</h3>
+                    <p>Advanced canvas techniques with multiple drawing modes</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">Advanced</span>
+                    <br>
+                    <a href="demos/canvas-art-extended.html">🌗 Open Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <h3>🎩 Matrix Rain</h3>
+                    <p>Classic Matrix-style falling text animation</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">Retro</span>
+                    <br>
+                    <a href="demos/matrix-rain.html">🌗 Open Demo →</a>
+                </div>
+                <div class="demo-card">
+                    <h3>🌳 Fractal Tree</h3>
+                    <p>Organic, growing fractal trees with physics-based animation</p>
+                    <span class="badge">Canvas 2D</span>
+                    <span class="badge">Recursive</span>
+                    <br>
+                    <a href="demos/fractal-tree.html">🌗 Open Demo →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEBGL CATEGORY -->
+        <div class="category" id="webgl">
+            <h2>🌠 WebGL Shaders</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🌊 Wave Shader</h3>
+                    <p>Real-time wave effects with mouse interaction using WebGL</p>
+                    <span class="badge">WebGL</span>
+                    <span class="badge">60+ FPS</span>
+                    <br>
+                    <a href="demos/wave-shader.html">🌗 Open Demo →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCROLL CATEGORY -->
+        <div class="category" id="scroll">
+            <h2>📄 Scroll Effects</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🚀 Scroll Effects</h3>
+                    <p>Smooth animations triggered by page scrolling</p>
+                    <span class="badge">lax.js</span>
+                    <span class="badge">Parallax</span>
+                    <br>
+                    <a href="demos/scroll-effects.html">🌗 Open Demo →</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </nav>
 
-  <main class="hero">
-    <div class="hero-content">
-      <h2 class="hero-title">Explorează Efecte Vizuale Spectaculoase</h2>
-      <p class="hero-subtitle">O colecție interactivă de animații JavaScript moderne folosind particles.js, tsparticles și lax.js</p>
-      <div class="cta-buttons">
-        <a href="demos/particles-gallery.html" class="btn btn-primary">Începe Explorarea</a>
-        <a href="https://github.com/Gzeu/js-effects-playground" class="btn btn-secondary" target="_blank">Vezi pe GitHub</a>
-      </div>
-    </div>
-
-    <div class="features">
-      <div class="feature-card">
-        <h3>✨ Particle Effects</h3>
-        <p>Efecte interactive de particule cu configurări personalizabile</p>
-      </div>
-      <div class="feature-card">
-        <h3>🎯 Scroll Animations</h3>
-        <p>Animații smooth activate de scroll cu lax.js</p>
-      </div>
-      <div class="feature-card">
-        <h3>🎨 Canvas Art</h3>
-        <p>Artă generativă și simulări fizice în canvas</p>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#6366f1' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: false },
-        size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#6366f1',
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: 'none',
-          random: false,
-          straight: false,
-          out_mode: 'out',
-          bounce: false
-        }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: { enable: true, mode: 'repulse' },
-          onclick: { enable: true, mode: 'push' },
-          resize: true
-        }
-      },
-      retina_detect: true
-    });
-  </script>
+    <footer>
+        <p>🛠️ Built with JavaScript | Maintained by <a href="https://github.com/Gzeu">George</a> | 👤 <a href="https://github.com/Gzeu/js-effects-playground">View on GitHub</a></p>
+        <p style="color: #00ff88; margin-top: 10px;">⭐ Star the repo if you find it useful!</p>
+    </footer>
 </body>
 </html>
