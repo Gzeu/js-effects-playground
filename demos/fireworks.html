@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>🎆 Fireworks</title>
+<style>*{margin:0;padding:0}body{background:#000;overflow:hidden}canvas{display:block}</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<a href="../index.html" style="position:absolute;bottom:20px;left:20px;color:#0f0;text-decoration:none;border:1px solid #0f0;padding:8px 16px">← Back</a>
+<script>
+const c=document.getElementById('c'),g=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;
+const particles=[];
+class Particle{
+constructor(x,y){this.x=x;this.y=y;this.vx=(Math.random()-0.5)*8;this.vy=(Math.random()-0.5)*8-2;this.life=1;this.color=`hsl(${Math.random()*360},100%,50%)`}}
+function firework(x,y){for(let i=0;i<50;i++)particles.push(new Particle(x,y))}
+document.addEventListener('click',e=>firework(e.clientX,e.clientY));
+function animate(){
+g.fillStyle='rgba(0,0,0,0.1)';g.fillRect(0,0,c.width,c.height);
+for(let i=particles.length-1;i>=0;i--){
+const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=0.1;p.life-=0.02;
+g.fillStyle=p.color;g.globalAlpha=p.life;g.fillRect(p.x,p.y,4,4);
+if(p.life<=0)particles.splice(i,1)}
+g.globalAlpha=1;
+requestAnimationFrame(animate)}
+setInterval(()=>firework(Math.random()*c.width,Math.random()*c.height/2),500);
+animate();
+window.addEventListener('resize',()=>{c.width=innerWidth;c.height=innerHeight})
+</script>
+</body>
+</html>
