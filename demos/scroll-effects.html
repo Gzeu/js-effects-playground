@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Effects - JS Effects Playground</title>
+  <script src="https://cdn.jsdelivr.net/npm/lax.js@2.0.3/lib/lax.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      color: #fff;
+    }
+    
+    .navbar {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 2rem;
+      font-weight: 500;
+    }
+    
+    .navbar a:hover { color: #fbbf24; }
+    
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .demo-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 600px;
+      text-align: center;
+    }
+    
+    .demo-box h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .demo-box p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    
+    .parallax-img {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      margin: 2rem auto;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="../index.html">← Home</a>
+    <a href="particles-gallery.html">Particles</a>
+    <a href="canvas-art.html">Canvas Art</a>
+  </nav>
+
+  <section>
+    <div class="demo-box" 
+         data-lax-preset="fadeInOut spin"
+         data-lax-anchor="self"
+         data-lax-optimize="true">
+      <h2>Fade & Spin</h2>
+      <p>Scroll pentru a vedea efectul de fade și rotație</p>
+      <div class="parallax-img"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="demo-box"
+         data-lax-preset="leftToRight"
+         data-lax-anchor="self">
+      <h2>Slide In</h2>
+      <p>Animație de intrare din stânga</p>
+      <div class="parallax-img"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="demo-box"
+         data-lax-preset="blurInOut"
+         data-lax-anchor="self">
+      <h2>Blur Effect</h2>
+      <p>Efect de blur la scroll</p>
+      <div class="parallax-img"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="demo-box"
+         data-lax-preset="scaleOut"
+         data-lax-anchor="self">
+      <h2>Scale Out</h2>
+      <p>Zoom out effect pe scroll</p>
+      <div class="parallax-img"></div>
+    </div>
+  </section>
+
+  <script>
+    window.onload = function() {
+      lax.init();
+      
+      // Add additional custom animations
+      lax.addDriver('scrollY', function () {
+        return window.scrollY
+      })
+
+      lax.addElements('.demo-box', {
+        scrollY: {
+          translateY: [['elInY', 'elCenterY', 'elOutY'], [100, 0, -100]],
+          opacity: [['elInY', 'elCenterY', 'elOutY'], [0.3, 1, 0.3]]
+        }
+      });
+    }
+  </script>
+</body>
+</html>

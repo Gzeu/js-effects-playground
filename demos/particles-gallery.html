@@ -2,60 +2,187 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Particles Gallery</title>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <link rel="stylesheet" href="../assets/css/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particles Gallery - JS Effects Playground</title>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <style>
-    #particles-js {
-      width: 100vw; height: 100vh; position: fixed; z-index: -1;
-      top: 0; left: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0a0e27;
+      color: #fff;
+      overflow-x: hidden;
     }
-    .center-content {
-      position: relative; z-index: 1; text-align: center; color: white;
-      top: 30vh;
+    
+    .navbar {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
     }
-    .center-content h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 2rem;
+      font-weight: 500;
+    }
+    
+    .navbar a:hover { color: #fbbf24; }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      padding: 6rem 2rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .demo-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .demo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    }
+    
+    .demo-preview {
+      height: 300px;
+      position: relative;
+    }
+    
+    .demo-info {
+      padding: 1.5rem;
+    }
+    
+    .demo-info h3 {
+      margin-bottom: 0.5rem;
+      color: #6366f1;
+    }
+    
+    .demo-info p {
+      opacity: 0.8;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <div class="center-content">
-    <h1>Particles.js Demo</h1>
-    <p>Efect generic de particule cu configurare custom!</p>
-    <a href="../index.html" style="color: white; margin-top: 2rem; display: inline-block;">← Back to Home</a>
+  <nav class="navbar">
+    <a href="../index.html">← Home</a>
+    <a href="scroll-effects.html">Scroll Effects</a>
+    <a href="canvas-art.html">Canvas Art</a>
+  </nav>
+
+  <div class="gallery">
+    <div class="demo-card" onclick="loadDemo1()">
+      <div id="demo1" class="demo-preview"></div>
+      <div class="demo-info">
+        <h3>🌌 Nebula Effect</h3>
+        <p>Interactive particle nebula with mouse repulsion</p>
+      </div>
+    </div>
+
+    <div class="demo-card" onclick="loadDemo2()">
+      <div id="demo2" class="demo-preview"></div>
+      <div class="demo-info">
+        <h3>❄️ Snow Effect</h3>
+        <p>Gentle falling snow particles</p>
+      </div>
+    </div>
+
+    <div class="demo-card" onclick="loadDemo3()">
+      <div id="demo3" class="demo-preview"></div>
+      <div class="demo-info">
+        <h3>🎆 Fireworks</h3>
+        <p>Colorful exploding fireworks on click</p>
+      </div>
+    </div>
+
+    <div class="demo-card" onclick="loadDemo4()">
+      <div id="demo4" class="demo-preview"></div>
+      <div class="demo-info">
+        <h3>🌊 Wave Effect</h3>
+        <p>Flowing wave particles with links</p>
+      </div>
+    </div>
   </div>
+
   <script>
-    particlesJS('particles-js', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#ffffff' },
-        shape: { type: 'circle' },
-        opacity: { value: 0.5, random: false },
-        size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#ffffff',
-          opacity: 0.4,
-          width: 1
+    function loadDemo1() {
+      tsParticles.load("demo1", {
+        particles: {
+          number: { value: 80 },
+          color: { value: ["#6366f1", "#8b5cf6", "#ec4899"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3, random: true },
+          links: { enable: true, distance: 150, color: "#6366f1", opacity: 0.4 },
+          move: { enable: true, speed: 2 }
         },
-        move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: { enable: true, mode: 'repulse' },
-          onclick: { enable: true, mode: 'push' },
-          resize: true
+        interactivity: {
+          events: { onHover: { enable: true, mode: "repulse" } }
         }
-      },
-      retina_detect: true
-    });
+      });
+    }
+
+    function loadDemo2() {
+      tsParticles.load("demo2", {
+        particles: {
+          number: { value: 100 },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.8, random: true },
+          size: { value: 3, random: true },
+          move: { enable: true, speed: 1, direction: "bottom", straight: false }
+        }
+      });
+    }
+
+    function loadDemo3() {
+      tsParticles.load("demo3", {
+        emitters: {
+          position: { x: 50, y: 100 },
+          rate: { delay: 0.5, quantity: 5 }
+        },
+        particles: {
+          color: { value: ["#ff0000", "#00ff00", "#0000ff", "#ffff00"] },
+          move: { enable: true, speed: 5, outModes: "destroy" },
+          opacity: { value: 1, animation: { enable: true, speed: 1, startValue: "max", destroy: "min" } },
+          size: { value: 3, random: true }
+        }
+      });
+    }
+
+    function loadDemo4() {
+      tsParticles.load("demo4", {
+        particles: {
+          number: { value: 60 },
+          color: { value: "#00d9ff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.7 },
+          size: { value: 4 },
+          links: { enable: true, distance: 120, color: "#00d9ff" },
+          move: { enable: true, speed: 1.5, direction: "right", warp: true }
+        }
+      });
+    }
+
+    // Load all demos on page load
+    window.onload = () => {
+      loadDemo1();
+      loadDemo2();
+      loadDemo3();
+      loadDemo4();
+    };
   </script>
 </body>
 </html>

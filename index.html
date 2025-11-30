@@ -2,22 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JS Effects Playground</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Effects Playground - Interactive JavaScript Animations</title>
   <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-  <nav>
-    <h1>JS Effects Playground</h1>
-    <ul>
-      <li><a href="demos/particles-gallery.html">Particles</a></li>
-      <li><a href="demos/scroll-effects.html">Scroll Effects</a></li>
-      <li><a href="demos/canvas-art.html">Canvas Art</a></li>
-    </ul>
+  <div id="particles-js"></div>
+  
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">🎨 JS Effects Playground</h1>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="demos/particles-gallery.html">Particles</a></li>
+        <li><a href="demos/scroll-effects.html">Scroll Effects</a></li>
+        <li><a href="demos/canvas-art.html">Canvas Art</a></li>
+        <li><a href="https://github.com/Gzeu/js-effects-playground" target="_blank">GitHub</a></li>
+      </ul>
+    </div>
   </nav>
-  <main>
-    <h2>Explorează efecte vizuale spectaculoase!</h2>
-    <p>Alege o categorie din meniu pentru a experimenta efecte animate JavaScript moderne.</p>
+
+  <main class="hero">
+    <div class="hero-content">
+      <h2 class="hero-title">Explorează Efecte Vizuale Spectaculoase</h2>
+      <p class="hero-subtitle">O colecție interactivă de animații JavaScript moderne folosind particles.js, tsparticles și lax.js</p>
+      <div class="cta-buttons">
+        <a href="demos/particles-gallery.html" class="btn btn-primary">Începe Explorarea</a>
+        <a href="https://github.com/Gzeu/js-effects-playground" class="btn btn-secondary" target="_blank">Vezi pe GitHub</a>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <h3>✨ Particle Effects</h3>
+        <p>Efecte interactive de particule cu configurări personalizabile</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎯 Scroll Animations</h3>
+        <p>Animații smooth activate de scroll cu lax.js</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎨 Canvas Art</h3>
+        <p>Artă generativă și simulări fizice în canvas</p>
+      </div>
+    </div>
   </main>
+
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#6366f1' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#6366f1',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'repulse' },
+          onclick: { enable: true, mode: 'push' },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>
