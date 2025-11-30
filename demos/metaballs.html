@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Metaballs</title><style>body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style></head><body><canvas id="c"></canvas><script>
+const c = document.getElementById('c'), ctx = c.getContext('2d'), W = c.width = innerWidth, H = c.height = innerHeight;
+let t = 0, blobs = [{x: W/2, y: H/2, r: 100}, {x: W/3, y: H/3, r: 80}, {x: 2*W/3, y: 2*H/3, r: 120}];
+function draw() {
+  ctx.fillStyle = '#000'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = '#0ff'; t += 0.02;
+  blobs.forEach(b => { b.x += Math.sin(t)*2; b.y += Math.cos(t)*1.5; });
+  for(let x=0; x<W; x+=4) for(let y=0; y<H; y+=4) {
+    let sum = 0;
+    blobs.forEach(b => sum += 200 / Math.hypot(x-b.x, y-b.y));
+    ctx.fillStyle = sum > 1 ? `hsl(${sum*20},100%,${50+sum*20}%)` : 'transparent';
+    ctx.fillRect(x,y,4,4);
+  }
+  requestAnimationFrame(draw);
+}
+addEventListener('mousemove', e => { blobs[0].x = e.clientX; blobs[0].y = e.clientY; });
+draw();
+</script></body></html>
