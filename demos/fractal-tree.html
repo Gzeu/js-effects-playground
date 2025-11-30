@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><title>Fractal Tree</title><style>body{margin:0;background:linear-gradient(#111,#333);overflow:hidden}canvas{display:block}</style></head><body><canvas id="c"></canvas><script>
+const c = document.getElementById('c'), ctx = c.getContext('2d'), W = c.width = innerWidth, H = c.height = innerHeight;
+class Branch { constructor(x,y,len,angle,w) { this.x=x; this.y=y; this.len=len; this.angle=angle; this.w=w; this.grow=0; } update(g) { this.grow += g; } show() { ctx.strokeStyle=`hsl(120,100%,${50+this.grow*10}%)`; ctx.lineWidth=this.w*this.grow; ctx.beginPath(); ctx.moveTo(this.x,this.y); ctx.lineTo(this.x+Math.cos(this.angle)*this.len*this.grow, this.y+Math.sin(this.angle)*this.len*this.grow); ctx.stroke(); } }
+let branches = [{x: W/2, y: H-100, len: 100, angle: -Math.PI/2, w: 10 }];
+function draw() { ctx.clearRect(0,0,W,H); branches.forEach(b => { b.update(0.01); b.show(); if(b.grow>1 && b.len>2) { branches.push(new Branch(b.x+Math.cos(b.angle)*b.len*b.grow, b.y+Math.sin(b.angle)*b.len*b.grow, b.len*0.7, b.angle+0.3, b.w*0.7)); branches.push(new Branch(b.x+Math.cos(b.angle)*b.len*b.grow, b.y+Math.sin(b.angle)*b.len*b.grow, b.len*0.7, b.angle-0.3, b.w*0.7)); } }); requestAnimationFrame(draw); }
+draw();
+</script></body></html>
